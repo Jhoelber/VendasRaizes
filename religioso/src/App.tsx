@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router"; // ou "react-router-dom"
+import { Routes, Route } from "react-router-dom"; // ou "react-router-dom"
 import { PaginaPrincipal } from "./components/PaginaPrincipal";
 import { Questionario } from "./components/Questionario";
 import { Vendas } from "./components/Vendas";

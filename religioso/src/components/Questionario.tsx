@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { BarraProgresso } from "./BarraProgresso";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import raizesProfundas from "../assets/raizesProfundasPrincipal.png";
 type PerguntaTexto = {
   id: string;
