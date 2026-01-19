@@ -166,9 +166,7 @@ export function ImageCarousel() {
         ))}
       </div>
 
-      <p className="mt-3 text-xs text-gray-600 text-center">
-        No celular, deslize. No computador, clique nas setas (ou use ← →).
-      </p>
+     
     </div>
   );
 }
