@@ -1,12 +1,41 @@
 import raizesProfundas from "../assets/raizesProfundasPrincipal.png";
 import garantiaImg from "../assets/garantia.png";
 import { ImageCarousel } from "./ImageCarousel";
-
+import type { MouseEvent } from "react";
 const LINK_COMPLETO =
   "https://pay.hotmart.com/N103824047H?checkoutMode=10&bid=1768265452736";
 
 const LINK_ECONOMICO =
   "https://pay.hotmart.com/F103819045E?checkoutMode=10&bid=1768265453204";
+
+
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
+function trackAndGo(
+  e: MouseEvent<HTMLAnchorElement>,
+  url: string,
+  plano: "completo" | "economico",
+  value: number
+) {
+  e.preventDefault();
+
+  try {
+    window.fbq?.("track", "InitiateCheckout", {
+      currency: "BRL",
+      value,
+      content_name: `Raizes Profundas - ${plano}`,
+    });
+  } catch { }
+
+  setTimeout(() => {
+    window.location.href = url;
+  }, 150);
+}
+
 
 export const Vendas = () => {
   return (
@@ -77,60 +106,60 @@ export const Vendas = () => {
         </div>
 
         {/* O que inclui (3 PDFs) */}
-       <div className="space-y-4">
-  {/* Resumo rápido */}
-  <div className="rounded-2xl bg-green-100 p-5 text-left">
-    <h3 className="font-extrabold text-lg">O que você recebe (resumo)</h3>
-    <ul className="mt-3 space-y-2 text-sm text-gray-800">
-      <li>✅ Guia Prático (devocional + método)</li>
-      <li>✅ Bônus: 21 Dias de Paz Interior</li>
-      <li>✅ Bônus: Aromaterapia Religiosa</li>
-    </ul>
+        <div className="space-y-4">
+          {/* Resumo rápido */}
+          <div className="rounded-2xl bg-green-100 p-5 text-left">
+            <h3 className="font-extrabold text-lg">O que você recebe (resumo)</h3>
+            <ul className="mt-3 space-y-2 text-sm text-gray-800">
+              <li>✅ Guia Prático (devocional + método)</li>
+              <li>✅ Bônus: 21 Dias de Paz Interior</li>
+              <li>✅ Bônus: Aromaterapia Religiosa</li>
+            </ul>
 
-    <div className="mt-4 space-y-3">
-      <details className="rounded-xl bg-white p-4 border border-green-200">
-        <summary className="cursor-pointer font-extrabold">
-          📘 Ver detalhes do Guia Prático
-        </summary>
-        <ul className="mt-3 space-y-2 text-sm text-gray-800">
-          <li>• Um devocional simples e real (intimidade com Deus, sem “performance”).</li>
-          <li>• “Lugar secreto” + rotina sem distrações (modo avião).</li>
-          <li>• Método S.O.A.P. para entender qualquer texto bíblico.</li>
-          <li>• Modelo A.C.A.S. para orar com propósito.</li>
-          <li>• Diário espiritual + meditação bíblica para “digerir” a Palavra.</li>
-        </ul>
-      </details>
+            <div className="mt-4 space-y-3">
+              <details className="rounded-xl bg-white p-4 border border-green-200">
+                <summary className="cursor-pointer font-extrabold">
+                  📘 Ver detalhes do Guia Prático
+                </summary>
+                <ul className="mt-3 space-y-2 text-sm text-gray-800">
+                  <li>• Um devocional simples e real (intimidade com Deus, sem “performance”).</li>
+                  <li>• “Lugar secreto” + rotina sem distrações (modo avião).</li>
+                  <li>• Método S.O.A.P. para entender qualquer texto bíblico.</li>
+                  <li>• Modelo A.C.A.S. para orar com propósito.</li>
+                  <li>• Diário espiritual + meditação bíblica para “digerir” a Palavra.</li>
+                </ul>
+              </details>
 
-      <details className="rounded-xl bg-white p-4 border border-green-200">
-        <summary className="cursor-pointer font-extrabold">
-          🗓️ Ver detalhes do bônus: 21 Dias de Paz Interior
-        </summary>
-        <ul className="mt-3 space-y-2 text-sm text-gray-800">
-          <li>• 10–15 minutos por dia (pela manhã ou antes de dormir).</li>
-          <li>• Cada dia: versículo + reflexão + oração.</li>
-          <li>• Roteiro meditativo para leitura e contemplação.</li>
-          <li>• Bônus: “oração de emergência” para momentos difíceis.</li>
-        </ul>
-      </details>
+              <details className="rounded-xl bg-white p-4 border border-green-200">
+                <summary className="cursor-pointer font-extrabold">
+                  🗓️ Ver detalhes do bônus: 21 Dias de Paz Interior
+                </summary>
+                <ul className="mt-3 space-y-2 text-sm text-gray-800">
+                  <li>• 10–15 minutos por dia (pela manhã ou antes de dormir).</li>
+                  <li>• Cada dia: versículo + reflexão + oração.</li>
+                  <li>• Roteiro meditativo para leitura e contemplação.</li>
+                  <li>• Bônus: “oração de emergência” para momentos difíceis.</li>
+                </ul>
+              </details>
 
-      <details className="rounded-xl bg-white p-4 border border-green-200">
-        <summary className="cursor-pointer font-extrabold">
-          🌿 Ver detalhes do bônus: Aromaterapia Religiosa
-        </summary>
-        <ul className="mt-3 space-y-2 text-sm text-gray-800">
-          <li>• Receitas + intenção espiritual + orações (paz, entrega, silêncio…).</li>
-          <li>• “Casa de Paz”: spray ambiental para preparar o ambiente de oração.</li>
-          <li className="text-xs text-gray-600 pt-2">
-            *Uso devocional. Se você tiver alergias, sensibilidade ou estiver grávida,
-            consulte um profissional antes de usar óleos essenciais.
-          </li>
-        </ul>
-      </details>
-    </div>
-  </div>
-</div>
+              <details className="rounded-xl bg-white p-4 border border-green-200">
+                <summary className="cursor-pointer font-extrabold">
+                  🌿 Ver detalhes do bônus: Aromaterapia Religiosa
+                </summary>
+                <ul className="mt-3 space-y-2 text-sm text-gray-800">
+                  <li>• Receitas + intenção espiritual + orações (paz, entrega, silêncio…).</li>
+                  <li>• “Casa de Paz”: spray ambiental para preparar o ambiente de oração.</li>
+                  <li className="text-xs text-gray-600 pt-2">
+                    *Uso devocional. Se você tiver alergias, sensibilidade ou estiver grávida,
+                    consulte um profissional antes de usar óleos essenciais.
+                  </li>
+                </ul>
+              </details>
+            </div>
+          </div>
+        </div>
 
-<ImageCarousel/>
+        <ImageCarousel />
 
 
 
@@ -151,7 +180,7 @@ export const Vendas = () => {
               <div>
                 <p className="font-extrabold text-base">Plano Completo</p>
                 <p className="text-xs text-emerald-700 font-bold mt-1 inline-flex items-center gap-2">
-                  ⭐ Recomendado 
+                  ⭐ Recomendado
                 </p>
               </div>
 
@@ -170,6 +199,7 @@ export const Vendas = () => {
             <a
               href={LINK_COMPLETO}
               rel="noopener noreferrer"
+              onClick={(e) => trackAndGo(e, LINK_COMPLETO, "completo", 27.9)}
               className="
         mt-4 w-full block text-center py-4 rounded-xl font-extrabold
         text-white bg-green-600 hover:bg-green-700
@@ -209,6 +239,7 @@ export const Vendas = () => {
             <a
               href={LINK_ECONOMICO}
               rel="noopener noreferrer"
+              onClick={(e) => trackAndGo(e, LINK_ECONOMICO, "economico", 19.9)}
               className="
         mt-4 w-full block text-center py-4 rounded-xl font-extrabold
         text-white bg-sky-600 hover:bg-sky-700
@@ -286,6 +317,7 @@ export const Vendas = () => {
           <a
             href={LINK_COMPLETO}
             rel="noopener noreferrer"
+             onClick={(e) => trackAndGo(e, LINK_COMPLETO, "completo", 27.9)}
             className="w-full block text-center py-3 rounded-xl font-extrabold text-white bg-green-600 hover:bg-green-700 transition-all focus:outline-none focus:ring-4 focus:ring-green-200"
           >
             Comprar pacote completo — R$ 27,90
